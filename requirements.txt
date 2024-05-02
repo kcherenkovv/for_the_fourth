@@ -4,4 +4,5 @@ uvicorn
 transformers
 torch
 httpx
+sentencepiece
 pyqt5
