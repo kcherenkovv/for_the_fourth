@@ -1,24 +1,53 @@
-[![Tests](https://github.com/tokarevsas31/ml_fastapi_tests/actions/workflows/python-app.yml/badge.svg)](https://github.com/tokarevsas31/ml_fastapi_tests/actions/workflows/python-app.yml)
+Распознавание автомобильных номеров и определение регионов, указанных на номерах
 
-# An example of ML Application with the pretrained model and test.
+Проект по курсу "Программная инженерия 2" магистратуры УРФУ
 
-An example of English text tone detection with [Hugging Face](https://huggingface.co/) library.
+О проекте
 
-Example can be used by script main.py
+Описание работы
 
+Находит на изображении фрагменты с автомобильными номерами и показывает их
+Распознаёт символы на каждом фрагменте
+Проверяет код региона по базе и выдает соответствующий регион
 
-# Tests GitHub Actions
+Используемые библиотеки и модели
 
-This repository also contains tests. Tests can be seen in script test_main.py.
+Для поиска номера использует модель из Hugging Face [keremberke/yolov5m-license-plate]
+Для распознавания текста используется модель из Hugging Face [microsoft/trocr-base-printed]
+Интерфейс пользователя - библиотека [streamlit]
+Для работы API - FastAPI и uvicorn
 
-# Using user interface for sentiment analysis
+Системные требования
 
-1. Install all required libraries from requirements.txt
-2. Launch script pyqt_app.py
-3. Enter text for analysis in app
-   
-   ![alt text](imgs/image.png)
+Компьютер и система удовлетворяющие требованиям PyTorch
+Подробнее на офф. сайте: https://pytorch.org/get-started/locally/
 
-4. Press button "Predict" and get your results
+Как запустить WEB streamlit
 
-   ![alt text](imgs/image2.png)
+Установить PyTorch: https://pytorch.org/get-started/locally/
+Установить зависимости: pip install -r requirements.txt
+Запустить проект с помощью streamlit: streamlit run main.py
+Через браузер открыть адрес, указанный в streamlit и загрузить изображение.
+Примеры изображений есть в папке /example_img
+
+Как запустить API
+
+При необходимости можно запустить API. Оно работает в отдельном процессе на базе веб-сервера uvicorn
+Команда для запуска API: uvicorn api:app
+
+В API реализовано 2 метода:
+GET / - для проверки работы. Возвращает строку с приветствием.
+
+POST /recognize - распознавание номеров на изображении. Он принимает единственный параметр - файл изображения и возвращает массив с распознанными на изображении номерами автомобилей.
+Пример запроса через CURL: curl -X 'POST' 'http://127.0.0.1:8000/recognize' -F 'file=@example_1.jpg;type=image/jpeg'
+
+Демо-версия приложения в облаке STREAMLIT доступна по ссылке:
+https://urfu-program-engineering-1-group-1-18.streamlit.app/
+
+Команда
+
+Кирилл Черенков
+Екатерина Таратута
+Михаил Вяткин
+Николай Шешин
+Серафим Завгородний
